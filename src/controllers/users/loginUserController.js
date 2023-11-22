@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 require('dotenv').config();
+const userLogState = require('../../utils/userLogState.js');
 
 const queryDatabase = require('../../database/database');
 const { generateToken } = require('../../auth/middleware/middleWare');
@@ -26,6 +27,7 @@ async function loginUserController(req, res) {
     }
 
     const token = generateToken(user.id, user.full_name);
+    userLogState.setActiveUserId(user.id)
     res.cookie('token', token, {
       sameSite: 'none',
       secure: process.env.NODE_ENV === 'production', // Set to true in production

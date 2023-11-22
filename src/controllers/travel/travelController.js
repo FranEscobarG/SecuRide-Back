@@ -6,8 +6,9 @@ const userLogState = require('../../utils/userLogState.js');
 // POST QUE SE HARA DESDE EL FRONT
 async function startTravel(req, res) {
     try {
-        const userId = req.user.userId;
-        console.log(req.user)
+        // const userId = req.user.userId;
+        const {userId} = req.body
+        console.log(userId)
 
         if (!userId) {
             return res.status(400).json({ error: 'No se ha encontrado el usuario.' });
